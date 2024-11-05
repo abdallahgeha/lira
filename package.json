@@ -5,7 +5,8 @@
   "main": "server/dist/index.js",
   "scripts": {
     "docker:build": "docker build -t lira .",
-    "docker:run": "docker run -p 3000:3000 lira"
+    "docker:run": "docker run -p 3000:3000 lira",
+    "deploy": "sh ./deploy.sh"
   },
   "author": "Abdallah Geha",
   "license": "ISC"
