@@ -1,0 +1,12 @@
+{
+  "name": "lira",
+  "version": "1.0.0",
+  "description": "card payment system",
+  "main": "server/dist/index.js",
+  "scripts": {
+    "docker:build": "docker build -t lira .",
+    "docker:run": "docker run -p 3000:3000 lira"
+  },
+  "author": "Abdallah Geha",
+  "license": "ISC"
+}
