@@ -1,0 +1,46 @@
+version: "3.10"
+
+services:
+  # PostgreSQL service
+  db:
+    image: postgres:13
+    container_name: lira_db
+    environment:
+      POSTGRES_DB: liradb
+      POSTGRES_USER: lira_admin
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - lira-network
+
+  # Express app service
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: lira_app
+    ports:
+      - "3000:3000"
+    environment:
+      - DATABASE_HOST=db
+      - DATABASE_PORT=5432
+      - DATABASE_NAME=liradb
+      - DATABASE_USER=lira_admin
+      - DATABASE_PASSWORD=password
+      - DATABASE_URL=postgresql://lira_admin:password@db:5432/liradb?schema=public
+    depends_on:
+      - db
+    networks:
+      - lira-network
+
+# Define a named volume for PostgreSQL data
+volumes:
+  pgdata:
+
+# Define the network so both services can communicate
+networks:
+  lira-network:
+    driver: bridge
