@@ -6,7 +6,7 @@
   "scripts": {
     "prebuild": "cd ../client && npm run build",
     "build": "npx tsc",
-    "start": "NODE_ENV=production node dist/index.js",
+    "start": "npx prisma db push && npx prisma generate && NODE_ENV=production node dist/index.js",
     "dev": "NODE_ENV=development nodemon src/index.ts"
   },
   "author": "",

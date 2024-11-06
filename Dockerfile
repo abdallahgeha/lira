@@ -15,6 +15,9 @@ RUN npm run build
 
 # Build the server TypeScript code
 WORKDIR /app/server
+
+ENV NODE_TLS_REJECT_UNAUTHORIZED=0
+
 RUN npm install
 RUN npm run build
 
@@ -26,6 +29,7 @@ WORKDIR /app
 
 # Set environment variable for production
 ENV NODE_ENV=production
+ENV NODE_TLS_REJECT_UNAUTHORIZED=0
 
 # Expose port 3000
 EXPOSE 3000
@@ -41,4 +45,8 @@ RUN npm install --production --prefix ./server
 
 # Start the Express server
 # CMD ["npm", "start", "--prefix", "./server"]
-CMD ["node", "./server/dist/index.js"]
+# CMD ["sh", "-c", "npx prisma db push && npx prisma generate && node ./server/dist/index.js"]
+
+WORKDIR /app/server
+CMD ["npm", "start"]
+
