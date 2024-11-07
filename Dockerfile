@@ -21,42 +21,4 @@ ENV NODE_TLS_REJECT_UNAUTHORIZED=0
 RUN npm install
 RUN npm run build
 
-# ENV DATABASE_URL="postgresql://lira_admin:password@db:5432/liradb?schema=public"
-# RUN npx prisma migrate deploy
-
 CMD ["npm", "start"]
-
-
-# RUN npx prisma generate
-
-# CMD ["npm", "start"]
-
-# # Stage 2: Set up the production environment for the Express server
-# FROM node:lts-alpine
-
-# # Set working directory
-# WORKDIR /app
-
-# # Set environment variable for production
-# ENV NODE_ENV=production
-# ENV NODE_TLS_REJECT_UNAUTHORIZED=0
-
-# # Expose port 3000
-# EXPOSE 3000
-
-# # Copy only the compiled server code and necessary files from the builder stage
-# COPY --from=builder /app/server/dist ./server/dist
-# COPY --from=builder /app/client/dist ./client/dist
-# COPY --from=builder /app/server/package.json ./server/package.json
-# COPY --from=builder /app/server/package-lock.json ./server/package-lock.json
-
-# # Install only production dependencies for the server
-# RUN npm install --production --prefix ./server
-
-# # Start the Express server
-# # CMD ["npm", "start", "--prefix", "./server"]
-# # CMD ["sh", "-c", "npx prisma db push && npx prisma generate && node ./server/dist/index.js"]
-
-# WORKDIR /app/server
-# CMD ["npm", "start"]
-

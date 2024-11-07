@@ -4,9 +4,12 @@
 // Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
+// To generate a new migration 
+// npx prsima migrate dev with branch name
+
 generator client {
-  provider = "prisma-client-js"
-  binaryTargets   = ["linux-musl-arm64-openssl-3.0.x", "native"]
+  provider      = "prisma-client-js"
+  binaryTargets = ["linux-musl-arm64-openssl-3.0.x", "native"]
 }
 
 datasource db {
@@ -18,4 +21,10 @@ model User {
   id    Int     @id @default(autoincrement())
   email String  @unique
   name  String?
+}
+
+model Books {
+  id   Int     @id @default(autoincrement())
+  name String?
+  cost Int?    @default(0)
 }
