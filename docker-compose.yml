@@ -1,7 +1,8 @@
 services:
   # PostgreSQL service
   db:
-    image: postgres:13
+    image: postgres:15-alpine
+    restart: always
     container_name: lira_db
     environment:
       POSTGRES_DB: liradb
@@ -10,7 +11,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - pg_data:/var/lib/postgresql/data
     networks:
       - lira-network
 
@@ -51,7 +52,7 @@ services:
 
 # Define a named volume for PostgreSQL data
 volumes:
-  pgdata:
+  pg_data:
 
 # Define the network so both services can communicate
 networks:
